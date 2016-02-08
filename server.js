@@ -5,13 +5,14 @@ var pg = require('pg');
 var app = express();
 
 app.set('port', process.env.PORT || 8080);
-console.log('DB URl:' + process.env.DATABASE_URL);
+
 app.use(express.static('public'));
 app.use(bodyParser.json());
+var conString = "postgres://updtqhqhdhovgz:IAR7ogoUs2UE91esdbzE3oKCud@ec2-54-225-215-233.compute-1.amazonaws.com:5432/da892qgbtnktaa";
 
 app.post('/update', function(req, res) {
    
-    pg.connect(process.env.DATABASE_URL, function (err, conn, done) {
+    pg.connect(conString, function (err, conn, done) {
         // watch for any connect issues
         if (err) console.log(err);
         conn.query(
