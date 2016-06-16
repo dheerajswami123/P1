@@ -42,7 +42,22 @@ app.post('/update', function(req, res) {
         );
     });
 });
-
+app.get('/contacts', function(res) {
+   
+    pg.connect(conString, function (err, conn, done) {
+        // watch for any connect issues
+        if (err) console.log(err);
+        conn.query(
+            'SELECT FirstName,LastName FROM Salesforce.Contact LIMIT 10',
+            function(err, result) {
+               
+                    done();
+                    res.json(result);
+               
+            }
+        );
+    });
+});
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });
