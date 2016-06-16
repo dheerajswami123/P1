@@ -42,7 +42,7 @@ app.post('/update', function(req, res) {
         );
     });
 });
-app.get('/contacts', function(res) {
+app.get('/contacts', function(req,res) {
    
     pg.connect(conString, function (err, conn, done) {
         // watch for any connect issues
